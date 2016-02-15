@@ -88,7 +88,7 @@ public class HomePageFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		if (view == null) {
-			view = inflater.inflate(R.layout.activity_homepage_fragment, null);
+			view = inflater.inflate(R.layout.activity_homepage, null);
 		}
 		ViewGroup parent = (ViewGroup) view.getParent();
 		if (parent != null) {
@@ -139,32 +139,19 @@ public class HomePageFragment extends Fragment {
 	
 	private void initView() {
 		//第一条曝光的内容
-				LinearLayout ll_content = (LinearLayout) getActivity().findViewById(R.id.ll_content);
+				
 				tv_exocommpany1 = (TextView) getActivity().findViewById(R.id.tv_exocommpany1);
 				tv_exocontent1 = (TextView) getActivity().findViewById(R.id.tv_exocontent1);
 				tv_exoname1 = (TextView) getActivity().findViewById(R.id.tv_exoname1);
 				tv_exotime1 = (TextView) getActivity().findViewById(R.id.tv_exotime1);
 				//第一条曝光的整个布局
 				LinearLayout ll_top = (LinearLayout) getActivity().findViewById(R.id.ll_top);
-				//第二条曝光的内容
-				tv_exoimage2 = (ImageView) getActivity().findViewById(R.id.tv_exoimage2);
-				//图片和内容的间距
-				tv_background = (TextView) getActivity().findViewById(R.id.tv_background);
-				tv_exocommpany2 = (TextView) getActivity().findViewById(R.id.tv_exocommpany2);
-				tv_exocontent2 = (TextView) getActivity().findViewById(R.id.tv_exocontent2);
-				tv_exoname2 = (TextView) getActivity().findViewById(R.id.tv_exoname2);
-				tv_exotime2 = (TextView) getActivity().findViewById(R.id.tv_exotime2);
+				
 				//第二条曝光的整个布局
 				LinearLayout ll_center = (LinearLayout) getActivity().findViewById(R.id.ll_center);
 				// 查询最多
 				ImageView iv_search = (ImageView) getActivity().findViewById(
-						R.id.iv_search);
-				// 曝光最多
-				ImageView iv_exposure = (ImageView) getActivity().findViewById(
-						R.id.iv_exposure);
-				// 加黑最多
-				ImageView iv_dark = (ImageView) getActivity()
-						.findViewById(R.id.iv_dark);
+						R.id.iv_search);				
 				// 公司识别次数布局
 				//rl_left = (RelativeLayout) getActivity().findViewById(R.id.rl_left);
 				// 公司及平台数

@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity {
 			                    "exosure", 
 			                    "mine", };// 给tab取得别名
 	private String[] tabtext = { "首页",
-			                     "书架" ,
+			                     "bookself" ,
 			                     "圈子", 
 			                     "我绘" };// 选项卡里面设置的名字
 	private static Class[] cla = { HomePageFragment.class,

@@ -17,7 +17,7 @@ import com.jim.magazine.entity.User;
  * @author jim
  * 
  */
-public class BeanUser {
+public class BeanUser extends BeanBase implements IUser{
 
 	private int         status;
 
@@ -68,12 +68,15 @@ public class BeanUser {
 	
 	public BeanUser() {
 		
-	}
+	}	
 	
-	//通过api接口获取
-	public BeanUser(String result)
+	//------------------------解析接口返回方法----------------------------------
+	
+	//解析登录接口返回结果
+	@Override
+	public User ParseLoginResult(String result)
 	{	
-		user = new User();
+		User user = new User();
 		try {
 			JSONObject object = new JSONObject(result);
 			int status_code = Integer.valueOf(object.getString("status_code"));
@@ -92,26 +95,33 @@ public class BeanUser {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return user;
 	}
 	
-	//调用登录接口
-	public List<NameValuePair> CallLogin(String name, 
-			                             String passwd)
+	
+	//解析登录注册返回结果
+	@Override
+	public void ParseRegisterResult(String result)
 	{
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		JSONObject object = new JSONObject();
 		try {
-			object.put("name",   name);
-			object.put("passwd", passwd);
-		} catch (Exception e) {
+			JSONObject object = new JSONObject(result);
+			int status_code = Integer.valueOf(object.getString("status_code"));
+			if (status_code == 200) {
+				JSONObject object2 = object.getJSONObject("content");
+				if (object2 != null) {
+					Integer is_success = Integer.valueOf(object2.getString("is_success"));
+					this.status = is_success;
+				}
+			}
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		params.add(new BasicNameValuePair("method",
-				HttpUrl.login_method));
-		params.add(new BasicNameValuePair("content", object
-				.toString()));
-			
-		return params; 
 	}
 
+	//判断用户名是否存在
+	@Override
+	public void ParseNameExistsResult(String result) {
+		// TODO Auto-generated method stub
+		
+	}
 }

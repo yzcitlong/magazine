@@ -2,7 +2,7 @@ package com.jim.magazine.config;
 
 public class PhpUrl {
     //测试服务器
-    public  static String SOUHEIURL = "http://192.168.8.101/magazine/index.php/Magazineapi";
+    public  static String API_URL = "http://192.168.1.131/yms_api/index.php/Magazineapi";
 	
 	//public  static String SOUHEIURL2 = "http://192.168.1.131";
 	public  static String SOUHEIURL2 = "http://www.souhei.com.cn";

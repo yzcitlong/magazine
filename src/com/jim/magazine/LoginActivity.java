@@ -1,8 +1,18 @@
 package com.jim.magazine;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.NameValuePair;
+
+import com.jim.magazine.bean.BeanBase.API_METHOD_INDEX;
 import com.jim.magazine.bean.BeanUser;
+import com.jim.magazine.entity.User;
 import com.jim.magazine.help.DialogUtil;
+import com.jim.magazine.help.HttpPostThread;
 import com.jim.magazine.help.KeyBoardUtil;
+import com.jim.magazine.help.NetworkUtil;
 import com.jim.magazine.help.Util;
 
 import android.app.Activity;
@@ -67,8 +77,8 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 				switch (msg.what) {
 				case 0:
 					String result = (String) msg.obj;
-					bean_user = new BeanUser(result);
-					if (bean_user != null) {
+					User user = bean_user.ParseLoginResult(result);
+					if (user != null) {
 						switch (bean_user.getStatus()) {
 						case 0:
 							getMessage(0);
@@ -76,9 +86,9 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 							getSharedPreferences("Login_UserInfo", Context.MODE_PRIVATE)
 									.edit()
 									.putBoolean("login_type", true)
-									.putLong("id",       Long.valueOf(bean_user.getUser().getId()))
-									.putString("nickname",    bean_user.getUser().getNickname())
-									.putString("sex",         bean_user.getUser().getSex())
+									.putLong("id",       Long.valueOf(user.getId()))
+									.putString("nickname",    user.getNickname())
+									.putString("sex",         user.getSex())
 									.commit();
 							
 							//if (Util.getRegisterType(LoginActivity.this)) {
@@ -194,8 +204,7 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 			
 			//临时跳转到主页
 			Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-			startActivity(intent);
-			/*
+			startActivity(intent);			
 			if (name != null 
 			 && passwd != null
 			 && !"".equals(name)
@@ -203,9 +212,12 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 				// 判断网络是否正常
 				boolean networkConnected = NetworkUtil.isNetworkConnected(LoginActivity.this);
 				if (networkConnected) {
-
 					DialogUtil.showProgressDialog(LoginActivity.this, tipMessage[7], 0 );
-					List<NameValuePair> params = bean_user.CallLogin(name, passwd);
+					Map<String,Object> my_request = new HashMap<String, Object>();
+					my_request.put("name", name);
+					my_request.put("passwd", passwd);
+					List<NameValuePair> params = bean_user.CallApi(API_METHOD_INDEX.API_USER_LOGIN, 
+							                                       my_request);
 					new HttpPostThread(params, handler, 0).start();
 				} else {					
 					DialogUtil.dismissProgressDialog();
@@ -214,18 +226,14 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 			} else {
 				getMessage(6);
 			}
-			*/
 			break;
 		case R.id.iv_ActionBar:
 			// 返回上一页
 			finish();
 			break;
-		case R.id.iv_home:
-			// 注册
-			/*
-			Intent intent2 = new Intent(MineFragment_Login.this, MineFragment_Register.class);
+		case R.id.iv_home:// 注册
+			Intent intent2 = new Intent(LoginActivity.this, RegisterActivity.class);
 			startActivity(intent2);
-			*/
 			break;
 		default:
 			break;

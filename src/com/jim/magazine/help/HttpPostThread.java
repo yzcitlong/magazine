@@ -44,7 +44,7 @@ public class HttpPostThread extends Thread{
 	
 	@Override
 	public void run() {
-		post = new HttpPost(PhpUrl.SOUHEIURL);
+		post = new HttpPost(PhpUrl.API_URL);
 		client = new DefaultHttpClient();
 		HttpParams httpParams = client.getParams();
 		HttpConnectionParams.setConnectionTimeout(httpParams, 5000);
