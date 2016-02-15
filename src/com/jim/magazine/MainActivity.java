@@ -24,8 +24,9 @@ import android.util.Log;
 
 /**
  * 主页的activity
+ * 主要是一个fragmentTabhost
  * 
- * @author stone 主要是一个fragmentTabhost
+ * @author jim 
  */
 @SuppressLint("NewApi")
 public class MainActivity extends FragmentActivity {
