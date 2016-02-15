@@ -94,7 +94,7 @@ public class MainActivity extends FragmentActivity {
 		inflater = LayoutInflater.from(MainActivity.this);
 		ftabhost = (FragmentTabHost) this.findViewById(android.R.id.tabhost);
 		FragmentManager t = getSupportFragmentManager();
-		ftabhost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+		ftabhost.setup(this, getSupportFragmentManager(), com.jim.magazine.R.id.realtabcontent);
 		preferences = this.getSharedPreferences("Statuse",
 				Context.MODE_PRIVATE);
 		editor = preferences.edit();
