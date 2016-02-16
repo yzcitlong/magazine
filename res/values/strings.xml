@@ -46,8 +46,8 @@
     <string name="ed_right">仅工作人员可见,以便我们将处理结果通知给您。</string>
     
     <!-- 注册 -->
-    <string name="user_phone">手机号码:</string>
-    <string name="ed_user_phone">请输入手机号码</string>
+    <string name="user_phone">用户名:</string>
+    <string name="ed_user_phone">请输入用户名</string>
     <string name="user_pwd_2">登录密码:</string>
     <string name="ed_user_pwd_2">请输入登录密码</string>
     <string name="code_name">验证码:</string>
