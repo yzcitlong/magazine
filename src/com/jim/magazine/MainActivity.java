@@ -33,16 +33,16 @@ public class MainActivity extends FragmentActivity {
 
 	private FragmentTabHost ftabhost;// 定义一个fragmenttabhost
 	private String[] tabtag = { "home_page",
-			                    "rankinglist", 
-			                    "exosure", 
+			                    "bookself", 
+			                    "group", 
 			                    "mine", };// 给tab取得别名
 	private String[] tabtext = { "首页",
-			                     "bookself" ,
+			                     "书架" ,
 			                     "圈子", 
 			                     "我绘" };// 选项卡里面设置的名字
-	private static Class[] cla = { HomePageFragment.class,
-		                           RankingListFragment.class,
-		                           ExosureFragment.class,
+	private static Class[] cla = { HomeFragment.class,
+		                           BookselfFragment.class,
+		                           GroupFragment.class,
 		                           MineFragment.class };
 	// 没有被选中的图片的id
 	private int[] imageid = { R.drawable.homepage_a,
@@ -100,12 +100,11 @@ public class MainActivity extends FragmentActivity {
 				Context.MODE_PRIVATE);
 		editor = preferences.edit();
 		
-		int i=0;
-		//for (int i = 0; i < tabtext.length; i++) {
+		for (int i = 0; i < tabtext.length; i++) {
 			ftabhost.addTab(
 					ftabhost.newTabSpec(this.tabtag[i]).setIndicator(getView(i)),
 					MainActivity.cla[i], null);
-		//}
+		}
 	}
 
 	private View getView(int i) {
