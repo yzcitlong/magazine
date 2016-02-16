@@ -50,14 +50,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 登录 -->
         <activity
             android:name="com.jim.magazine.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar">          
         </activity>
-        
+        <!-- 主框架 -->
         <activity
             android:name="com.jim.magazine.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:windowSoftInputMode="adjustPan">          
+        </activity>
+        <!-- 注册 -->
+        <activity
+            android:name="com.jim.magazine.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar"
             android:windowSoftInputMode="adjustPan">          
