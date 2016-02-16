@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		if (view == null) {
-			view = inflater.inflate(R.layout.activity_homepage, null);
+			view = inflater.inflate(R.layout.activity_home, null);
 		}
 		ViewGroup parent = (ViewGroup) view.getParent();
 		if (parent != null) {
