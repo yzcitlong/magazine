@@ -19,12 +19,12 @@
         android:layout_below="@+id/ic_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="手机号仅用于登录和找回密码,不会向第三方公开"
+        android:text="用户名仅用于登录和找回密码,不会向第三方公开"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:textSize="@dimen/small_text_size" />
 
-    <!-- 手机号码 -->
+    <!-- 用户名 -->
 
     <RelativeLayout
         android:id="@+id/register_phone"
