@@ -42,16 +42,15 @@ import android.widget.Toast;
 public class RegisterActivity extends Activity implements OnClickListener {
 	private AppManager manager;
 	private ImageView  register_code;
-	private EditText   register_ed_phone;
-	private EditText   register_ed_pwd;
+	private EditText   txt_name;
+	private EditText   txt_passwd;
 	private EditText   register_ed_code;
 	private CheckBox   cb_clause;
-	private boolean    phone_type = false; // 手机是否注册状态
-	private boolean    pwd_type   = false; // 密码状态
-	private boolean    code_type  = false; // 验证码状态
+	private boolean    is_register = false; // 手机是否注册状态
+	private boolean    pwd_type    = false; // 密码状态
+	private boolean    code_type   = false; // 验证码状态
 	
 	private BeanUser   beanUser = new BeanUser();
-	
 	
 	// 注册
 	Handler handler = new Handler() {
@@ -59,7 +58,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			switch (msg.what) {
 			case 0:
 				String result = (String) msg.obj;
-				// Log.i("jay_test--->>", result);
 				if (result != null && !"".equals(result)) {
 					User user = beanUser.ParseLoginResult(result);
 					if (user != null) {
@@ -72,7 +70,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 							Toast.makeText(getApplicationContext(), "注册失败", 0)
 									.show();
 						} else {
-							Toast.makeText(getApplicationContext(), "手机号码已存在",
+							Toast.makeText(getApplicationContext(), "用户名已存在",
 									0).show();
 						}
 					} else {
@@ -103,13 +101,13 @@ public class RegisterActivity extends Activity implements OnClickListener {
 					beanUser.ParseNameExistsResult(result);
 					int is_success = beanUser.getStatus();
 					if (is_success == 0) {
-						register_ed_phone.setError("手机号码已注册");
-						phone_type = false;
+						txt_name.setError("用户名已注册");
+						is_register = false;
 					} else if (is_success == -2) {
 						Toast.makeText(getApplicationContext(), "服务器连接失败", 0)
 								.show();
 					} else {
-						phone_type = true;
+						is_register = true;
 					}
 				} else {
 					Toast.makeText(getApplicationContext(), "服务器连接失败", 0)
@@ -128,7 +126,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		initView();
@@ -146,10 +143,10 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		TextView tv_ClassName = (TextView) findViewById(R.id.tv_ClassName);
 		tv_ClassName.setText("用户注册");
 		// tv_ClassName.setMovementMethod(movement);
-		// 手机号码
-		register_ed_phone = (EditText) findViewById(R.id.register_ed_phone);
+		// 用户名
+		txt_name = (EditText) findViewById(R.id.register_ed_phone);
 		// 登录密码
-		register_ed_pwd = (EditText) findViewById(R.id.register_ed_pwd);
+		txt_passwd = (EditText) findViewById(R.id.register_ed_pwd);
 		// 输入验证码
 		register_ed_code = (EditText) findViewById(R.id.register_ed_code);
 		// 验证码图画
@@ -166,8 +163,8 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	}
 
 	private void setOnClickListener() {
-		// 手机号码
-		register_ed_phone.addTextChangedListener(new TextWatcher() {
+		// 用户名
+		txt_name.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -191,7 +188,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		});
 		
 		// 密码
-		register_ed_pwd.addTextChangedListener(new TextWatcher() {
+		txt_passwd.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -210,14 +207,16 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (s != null && !"".equals(s)) {
+					/*
 					if ((s.length() > 16 || s.length() < 6)) {
 						pwd_type = false;
 						register_ed_pwd.setError("长度在6到16位之间");
 					} else {
+					*/
 						pwd_type = true;
-					}
+					//}
 				} else {
-					register_ed_pwd.setError("账号或密码不为空");
+					txt_passwd.setError("账号或密码不为空");
 				}
 			}
 		});
@@ -227,14 +226,11 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO Auto-generated method stub
 
 			}
 
@@ -271,9 +267,9 @@ public class RegisterActivity extends Activity implements OnClickListener {
 					RegisterActivity.this);
 
 			// 注册
-			if (cb_clause.isChecked() && phone_type && pwd_type && code_type) {
-				String name    = register_ed_phone.getText().toString();
-				String passwd  = register_ed_pwd.getText().toString();
+			if (cb_clause.isChecked() && is_register && pwd_type && code_type) {
+				String name    = txt_name.getText().toString();
+				String passwd  = txt_passwd.getText().toString();
 				// 判断网络是否正常
 				boolean networkConnected = NetworkUtil.isNetworkConnected(RegisterActivity.this);
 				if (networkConnected) {
@@ -295,17 +291,17 @@ public class RegisterActivity extends Activity implements OnClickListener {
 					Toast.makeText(getApplicationContext(), "网络连接失败", 0).show();
 				}
 			} else {
-				String string = register_ed_phone.getText().toString();
-				if(register_ed_phone.getEditableText().length()==0){
+				String string = txt_name.getText().toString();
+				if(txt_name.getEditableText().length()==0){
 					Toast.makeText(getApplicationContext(), "用户名不为空", 0)
-					.show();
+					     .show();
 				}
 				else if (!code_type) {
 					Toast.makeText(getApplicationContext(), "验证码输入有误", 0)
-							.show();
+						 .show();
 				} else if (!cb_clause.isChecked()) {
 					Toast.makeText(getApplicationContext(), "请先勾选用户协议", 0)
-							.show();
+						 .show();
 				}
 			}
 			break;
@@ -318,18 +314,17 @@ public class RegisterActivity extends Activity implements OnClickListener {
 		case R.id.register_code_bitmap:
 			boolean Code_type=false;
 			// 更换验证码
-			String phone = register_ed_phone.getText().toString();
-			String pwd = register_ed_pwd.getText().toString();
+			String phone = txt_name.getText().toString();
+			String pwd = txt_passwd.getText().toString();
 			if (phone != null && !"".equals(phone) && pwd != null
 					&& !"".equals(pwd)) {
-				if (phone_type && pwd_type) {
-					register_code.setImageBitmap(Code.getInstance()
-							.createBitmap());
+				if (is_register && pwd_type) {
+					register_code.setImageBitmap(Code.getInstance().createBitmap());
 					code = Code.getInstance().getCode();
-						register_ed_code.setText("");																
+					register_ed_code.setText("");																
 				} else {
-					if (!phone_type) {
-						Toast.makeText(getApplicationContext(), "手机号码已注册", 0)
+					if (!is_register) {
+						Toast.makeText(getApplicationContext(), "用户名已注册", 0)
 								.show();
 					} else if (!pwd_type) {
 						Toast.makeText(getApplicationContext(),
@@ -337,7 +332,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 					}
 				}
 			} else {
-				Toast.makeText(getApplicationContext(), "手机号或密码不为空", 0).show();
+				Toast.makeText(getApplicationContext(), "用户名或密码不为空", 0).show();
 			}
 			break;
 		default:
