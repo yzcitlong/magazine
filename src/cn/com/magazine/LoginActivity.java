@@ -41,16 +41,16 @@ import android.widget.Toast;
  * 
  */
 public class LoginActivity extends FragmentActivity implements OnClickListener {
-	private EditText       txt_name;
-	private EditText       txt_passwd;
-	private ImageView      iv_login;
-	private ProgressBar    pb_login;
-	private String         openid;
-	private String         nickname;
-	private String         headimgurl;
-	private CheckBox       cb_pwd;
-	public  static LoginActivity   login_page;
-	private RelativeLayout iv_ActionBar;
+	private EditText       txtName;
+	private EditText       txtPasswd;
+	private ImageView      ivLogin;
+	private ProgressBar    pbLogin;
+	private String         openId;
+	private String         nickName;
+	private String         headImgUrl;
+	private CheckBox       cbPwd;
+	public  static LoginActivity   loginPage;
+	private RelativeLayout ivActionBar;
 	
 	private BeanUser bean_user = new BeanUser();
 	
@@ -147,18 +147,18 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		login_page=this;
+		loginPage=this;
 		initView();		
 	}
 
 	private void initView() {		
 		// 进度条
-		pb_login = (ProgressBar) findViewById(R.id.pb_login);
+		pbLogin = (ProgressBar) findViewById(R.id.pb_login);
 		
 		// 标题
-		iv_ActionBar = (RelativeLayout) findViewById(R.id.iv_ActionBar);
-		iv_ActionBar.setVisibility(View.VISIBLE);
-		iv_ActionBar.setOnClickListener(this);
+		ivActionBar = (RelativeLayout) findViewById(R.id.iv_ActionBar);
+		ivActionBar.setVisibility(View.VISIBLE);
+		ivActionBar.setOnClickListener(this);
 		
 		TextView tv_ClassName = (TextView) findViewById(R.id.tv_ClassName);
 		tv_ClassName.setText(tipMessage[8]);
@@ -168,13 +168,13 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 		iv_home.setVisibility(View.VISIBLE);
 		iv_home.setOnClickListener(this);
 		
-		txt_name   = (EditText) findViewById(R.id.input_user);    // 账号
-		txt_passwd = (EditText) findViewById(R.id.input_pwd);     // 密码		
+		txtName   = (EditText) findViewById(R.id.input_user);    // 账号
+		txtPasswd = (EditText) findViewById(R.id.input_pwd);     // 密码		
 		findViewById(R.id.jump_findpwd).setOnClickListener(this); // 找回密码
 		
 		//登录
-		iv_login = (ImageView) findViewById(R.id.iv_login);
-		iv_login.setOnClickListener(this);
+		ivLogin = (ImageView) findViewById(R.id.iv_login);
+		ivLogin.setOnClickListener(this);
 	}
 	
 	@Override
@@ -201,8 +201,8 @@ public class LoginActivity extends FragmentActivity implements OnClickListener {
 			KeyBoardUtil.is_openKeyBoard(getApplicationContext(),LoginActivity.this);
 
 			// 登录
-			String name    = txt_name.getText().toString();
-			String passwd  = txt_passwd.getText().toString();
+			String name    = txtName.getText().toString();
+			String passwd  = txtPasswd.getText().toString();
 			
 			//临时跳转到主页
 			Intent intent = new Intent(LoginActivity.this,MainActivity.class);
