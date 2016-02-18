@@ -9,8 +9,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.jim.magazine.config.HttpUrl;
-
 public class BeanBase {
 
 	//接口调用方法索引

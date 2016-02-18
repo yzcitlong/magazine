@@ -1,14 +1,10 @@
 package com.jim.magazine.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.jim.magazine.config.HttpUrl;
 import com.jim.magazine.entity.User;
 
 /**

@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
-
-import com.jim.magazine.bean.BeanBase.API_METHOD_INDEX;
+import com.jim.magazine.R;
 import com.jim.magazine.bean.BeanUser;
+import com.jim.magazine.bean.BeanBase.API_METHOD_INDEX;
 import com.jim.magazine.entity.User;
 import com.jim.magazine.help.Code;
 import com.jim.magazine.help.HttpPostThread;
@@ -54,32 +52,34 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	
 	// 注册
 	Handler handler = new Handler() {
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case 0:
 				String result = (String) msg.obj;
-				if (result != null && !"".equals(result)) {
+				if (result != null 
+				&& !"".equals(result)) {
 					User user = beanUser.ParseLoginResult(result);
 					if (user != null) {
 						int is_sucess = beanUser.getStatus();
 						if (is_sucess == 0) {
 							Toast.makeText(getApplicationContext(), "注册成功", 0)
-									.show();
+								 .show();
 							manager.killActivity(RegisterActivity.this);
 						} else if (is_sucess == -1) {
 							Toast.makeText(getApplicationContext(), "注册失败", 0)
-									.show();
+								 .show();
 						} else {
-							Toast.makeText(getApplicationContext(), "用户名已存在",
-									0).show();
+							Toast.makeText(getApplicationContext(), "用户名已存在",0)
+							     .show();
 						}
 					} else {
 						Toast.makeText(getApplicationContext(), "服务器连接失败", 0)
-								.show();
+							 .show();
 					}
 				} else {
 					Toast.makeText(getApplicationContext(), "服务器连接失败", 0)
-							.show();
+						 .show();
 				}
 				iv_register.setClickable(true);
 				pb_register.setVisibility(View.INVISIBLE);
@@ -93,6 +93,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	// 判断用户名是否存在
 	Handler phone_handler = new Handler() {
 
+		@Override
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case 0:

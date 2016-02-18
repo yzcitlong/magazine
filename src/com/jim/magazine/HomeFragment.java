@@ -2,11 +2,11 @@ package com.jim.magazine;
 
 import java.util.List;
 
+import com.jim.magazine.R;
 import com.jim.magazine.entity.Company;
 import com.jim.magazine.entity.Exposure_Dynamic;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -85,8 +85,9 @@ public class HomeFragment extends Fragment {
 	private TextView tv_background;
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, 
+			                 ViewGroup container,
+			                 Bundle savedInstanceState) {
 		if (view == null) {
 			view = inflater.inflate(R.layout.activity_home, null);
 		}
@@ -167,7 +168,7 @@ public class HomeFragment extends Fragment {
 				iv_homepage_search = (ImageView) this.getView().findViewById(
 						R.id.iv_homepage_search);
 				preferences = this.getActivity().getSharedPreferences("Login_UserInfo",
-						Activity.MODE_PRIVATE);
+						Context.MODE_PRIVATE);
 				id = preferences.getLong("user_id", 0);	
 		
 	}

@@ -8,8 +8,11 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+/*
 import Decoder.BASE64Decoder;
 import Decoder.BASE64Encoder;
+*/
+
 
 public class DES {  
 	  
@@ -59,15 +62,17 @@ public class DES {
     public static String base64Encode(byte[] s) {  
         if (s == null)  
             return null;  
-        BASE64Encoder b = new BASE64Encoder();  
-        return b.encode(s);  
+      //  BASE64Encoder b = new BASE64Encoder();  
+       // return b.encode(s);
+        return null;
     }  
   
     public static byte[] base64Decode(String s) throws IOException {  
         if (s == null)  
             return null;  
-        BASE64Decoder decoder = new BASE64Decoder();  
-        byte[] b = decoder.decodeBuffer(s);  
-        return b;  
+        //BASE64Decoder decoder = new BASE64Decoder();  
+        //byte[] b = decoder.decodeBuffer(s);  
+        //return b;
+        return null;
     }  
 }

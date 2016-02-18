@@ -3,8 +3,8 @@ package com.jim.magazine;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.jim.magazine.R;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,10 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
 import android.os.Handler;
-import android.provider.Settings.Secure;
-import android.util.Log;
 
 /**
  * 主页的activity
@@ -130,6 +127,7 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			exitBy2Click(); // 调用双击退出函数

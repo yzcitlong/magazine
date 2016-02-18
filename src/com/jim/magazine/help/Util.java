@@ -1,6 +1,5 @@
 package com.jim.magazine.help;
 
-import android.app.Activity;
 import android.content.Context;
 
 

@@ -2,7 +2,6 @@ package com.jim.magazine.help;
 
 import java.util.Random;
 
-import android.R.color;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -29,7 +28,7 @@ public class Code {
 	private static Context context;
 	
 	public void getContext(Context context){
-		this.context=context;
+		Code.context=context;
 	}
 	
 	public static Code getInstance() {
