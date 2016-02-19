@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.jim.magazine.R;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +62,11 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+		//透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+ 
 		initDate();
 	}
 		
@@ -92,10 +98,15 @@ public class MainActivity extends FragmentActivity {
 		inflater = LayoutInflater.from(MainActivity.this);
 		ftabhost = (FragmentTabHost) this.findViewById(android.R.id.tabhost);
 		FragmentManager t = getSupportFragmentManager();
-		ftabhost.setup(this, getSupportFragmentManager(), com.jim.magazine.R.id.realtabcontent);
+		//ftabhost.setup(this, getSupportFragmentManager(), com.jim.magazine.R.id.realtabcontent);
+		int my_id = R.id.realtabcontent;
+//		ftabhost.setup(this, getSupportFragmentManager());
+		ftabhost.setup(this, getSupportFragmentManager(), my_id);
+		//ftabhost.setup(getActivity(), getChildFragmentManager(), my_id);
 		preferences = this.getSharedPreferences("Statuse",
 				Context.MODE_PRIVATE);
 		editor = preferences.edit();
+		
 		
 		for (int i = 0; i < tabtext.length; i++) {
 			ftabhost.addTab(
